@@ -7,8 +7,8 @@ Each solution file should follow the format: `problem#-initials.extension`. For 
 
 ## Contributing
 
-1. Create a branch with your initials.
-2. Push your solution file into the appropriate problem folder.
+1. Add your solution file to the appropriate problem folder.
+2. Use the above filenaming convention.
 3. Push to main.
 
 
