@@ -85,3 +85,53 @@ var searchGrid = (board, boxes, rows, cols) => {
 
     return true;
 }
+
+// 
+
+/**
+ * Set-Based Iterative
+ * Time O(ROWS + COLS + BOXES) | Space O(1)
+// https://leetcode.com/problems/valid-sudoku/solutions/476369/javascript-solution-beats-100-with-explanation-real-explanations/
+ */
+
+// The third solution can be referred to as the "Set-Based Iterative" approach for validating a Sudoku board. Here's why:
+
+// Set-Based: This method utilizes three sets (row, col, and box) in each iteration to track the numbers that have already been seen in the respective row, column, and 3x3 box. Sets are a natural choice for this task because they efficiently handle the operations of checking for existence and adding new elements, which are both crucial in this context.
+
+// Iterative: The solution iterates through each cell in the Sudoku board, checking the constraints for Sudoku: each number must appear exactly once in each row, column, and 3x3 box. The iterative process, combined with the use of sets, ensures that each number is validated against the Sudoku rules.
+
+// Time Complexity: The time complexity is O(ROWS * COLS), similar to the first two solutions, as it iterates through each cell of the board once.
+
+// Space Complexity: The space complexity is O(ROWS + COLS + BOXES), but since the size of the Sudoku board is fixed (9x9), this can also be considered O(1) - constant space complexity. Each set is recreated for each row, column, and box, and does not grow larger than the size of the board.
+
+// This solution is different from the first two as it does not preallocate space for tracking all rows, columns, and boxes. Instead, it dynamically creates sets for each row, column, and box during the iteration, which makes it more space-efficient while maintaining the same time efficiency.
+
+
+var isValidSudoku = function(board) {
+    for (let i = 0; i < 9; i++) {
+      let row = new Set(),
+          col = new Set(),
+          box = new Set();
+  
+      for (let j = 0; j < 9; j++) {
+        let _row = board[i][j];
+        let _col = board[j][i];
+        let _box = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
+        
+        if (_row != '.') {
+          if (row.has(_row)) return false;
+          row.add(_row);
+        }
+        if (_col != '.') {
+          if (col.has(_col)) return false;
+          col.add(_col);
+        }
+        
+        if (_box != '.') {
+          if (box.has(_box)) return false;
+          box.add(_box);
+        } 
+      }
+    }
+    return true
+  };
