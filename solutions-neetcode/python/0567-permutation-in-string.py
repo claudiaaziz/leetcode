@@ -32,3 +32,29 @@ class Solution:
                 matches -= 1
             l += 1
         return matches == 26
+    
+
+    
+from collections import Counter
+
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        window_length = len(s1)
+        s1_chars = Counter(s1)
+        s2_chars = Counter(s2[:window_length])
+
+        if window_length > len(s2): return False
+        
+        if s1_chars == s2_chars: return True
+        
+        for i in range(window_length, len(s2)):
+            s2_chars[s2[i - window_length]]-=1
+
+            if s2[i] in s2_chars:
+                s2_chars[s2[i]]+=1
+            else:
+                s2_chars[s2[i]] = 1
+            
+            if s1_chars == s2_chars: return True 
+
+        return False
