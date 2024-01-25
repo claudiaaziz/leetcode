@@ -22,3 +22,38 @@ class Solution:
             first.next = second
             second.next = tmp1
             first, second = tmp1, tmp2
+
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        #create a dummy list node
+        dummy = ListNode()
+        #set the head equal to dummy's next
+        dummy.next = head
+
+        #use while loop to add nodes to list
+        current = head
+        nodes = []
+        while current:
+            #add node to list
+            nodes.append(current)
+            #move to next node
+            current = current.next
+
+        #two pointers
+        l, r = 0, len(nodes) - 1
+
+        #new dummy.next will start at list[0]
+        dummy.next = nodes[l]
+
+        #add to nodes[l] and nodes[r] using .next, -=, +=
+        while l < r:
+            nodes[l].next = nodes[r]
+            l += 1
+            nodes[r].next = nodes[l]
+            r -= 1
+
+        #need this because it adds # from left again during the last cycle.
+        nodes[l].next = None
