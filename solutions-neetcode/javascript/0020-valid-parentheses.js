@@ -56,7 +56,6 @@ var isValid = (s, stack = []) => {
 // time - o(n) where n is the lenght of input string s
 // space - o(n) bc in worse case can store all parens in s if theyre all opening parens
 const isValid = (s) => {
-    if (s.length <= 1) return false
     const openingParens = [] 
 
     for (const paren of s) {
