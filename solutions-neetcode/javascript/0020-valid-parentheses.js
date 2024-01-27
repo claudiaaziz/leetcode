@@ -52,3 +52,25 @@ var isValid = (s, stack = []) => {
 
     return (stack.length === 0);
 };
+
+// time - o(n) where n is the lenght of input string s
+// space - o(n) bc in worse case can store all parens in s if theyre all opening parens
+const isValid = (s) => {
+    if (s.length <= 1) return false
+    const openingParens = [] 
+
+    for (const paren of s) {
+        if (paren === "(" || paren === "[" || paren === "{") {
+            openingParens.push(paren)
+        } else {
+            const lastParen = openingParens.pop()
+            if (!(lastParen === "(" && paren === ")" ||
+                  lastParen === "{" && paren === "}" ||
+                  lastParen === "[" && paren === "]")) {
+                return false
+            }
+        }
+    }
+
+    return openingParens.length === 0
+};
