@@ -100,3 +100,34 @@ class Node {
         this.next = next;
     }
 }
+
+
+// claudia
+class MinStack {
+    constructor() {
+        this.stack = [];
+    }
+
+    // o(1)
+    push(val) {
+        this.stack.push(val);
+        return this.stack;
+    };
+
+    // o(1)
+    pop() {
+        this.stack.pop();
+        return this.stack;
+    };
+
+// o(1)
+
+    top() {
+        return this.stack[this.stack.length - 1];
+    };
+
+    // o(n) (not possible to get min num in an array in o(1) in js) This is because you would need to inspect   every element in the array to determine the minimum, which would take linear time (O(n)), where n is the length of the array.
+    getMin() {
+        return Math.min(...this.stack);
+    };
+};
