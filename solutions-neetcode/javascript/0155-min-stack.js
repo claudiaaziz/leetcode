@@ -108,26 +108,27 @@ class MinStack {
         this.stack = [];
     }
 
-    // o(1)
+    // time o(1) - space o(1)
     push(val) {
         this.stack.push(val);
         return this.stack;
     };
 
-    // o(1)
+    // time o(1) - space o(1)
     pop() {
         this.stack.pop();
         return this.stack;
     };
 
-// o(1)
+    // time o(1) - space o(1)
     top() {
         return this.stack[this.stack.length - 1];
     };
 
     // o(n) (not possible to get min num in an array in o(1) in js) This is bc
     // you would need to inspect every element in the array to determine the
-    // minimum, which would take linear time (O(n)), where n is the length of the array.
+    // minimum, which would take linear time (O(n)), where n is the length of
+    // the array. - space o(1)
     getMin() {
         return Math.min(...this.stack);
     };
