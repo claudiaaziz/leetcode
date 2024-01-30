@@ -69,3 +69,28 @@ var performOperation = (char, stack) => {
 
     return operation(leftNum, rightNum);
 }
+
+// claudia
+// time o(n) - where n is the numb of tokens in the input array
+// space o(n) - where n is the num of tokens in the input array
+const evalRPN = (tokens) => {
+    const stack = []
+    const operations = {
+        "+": (a, b) => a + b,
+        "-": (a, b) => a - b,
+        "*": (a, b) => a * b,
+        "/": (a, b) => a / b >= 0 ? Math.floor(a / b) : Math.ceil(a / b)
+    }
+
+    for (const token of tokens) {
+        if (token in operations) {
+            const first = stack.pop()
+            const second = stack.pop()
+            stack.push(operations[token](second, first))
+        } else {
+            stack.push(Number(token))
+        }
+    }
+
+    return stack.pop()
+};
