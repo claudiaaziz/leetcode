@@ -96,3 +96,23 @@ var generateParenthesis = (n, combos = []) => {
 
     return combos
 }
+
+// claudia
+const generateParenthesis = (n, str = "", r = 0, l = 0) => {
+    const combinations = []
+
+    if (str.length === 2*n) {
+        combinations.push(str)
+        return combinations
+    }
+
+    if (l < n) {
+        combinations.push(...generateParenthesis(n, str + "(", r, l+1))
+    }
+
+    if (r < n && r < l) {
+        combinations.push(...generateParenthesis(n, str + ")", r+1, l))
+    }
+
+    return combinations
+};
