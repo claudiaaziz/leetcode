@@ -59,3 +59,24 @@ const search = (temperatures, day, temperature, days, dayCount = 1) => {
 
     days[day] = dayCount;                                         /* Ignore Space O(N) */
 }
+
+// claudia
+// time o(n) - space o(n)
+const dailyTemperatures = (temperatures) => {
+    const res = new Array(temperatures.length).fill(0)
+    const stack = []
+
+    for (let i = temperatures.length-1; i >= 0; i--) {
+        const currentTemp = temperatures[i]
+
+        while (currentTemp >= temperatures[stack[stack.length-1]] && stack.length > 0) {
+            stack.pop()
+        }
+
+        if (stack.length > 0) res[i] = stack[stack.length-1] - i
+
+        stack.push(i)
+    }
+
+    return res
+};
