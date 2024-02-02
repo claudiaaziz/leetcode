@@ -61,3 +61,25 @@ var searchDescending = (coordinates, previous = 0, fleets = 0) => {
 
     return fleets;
 }
+
+// claudia
+// time o(n log n) - space o(n) 
+const carFleet = (target, position, speed) => {
+    const n = position.length
+    const indices = []
+    for (let i = 0; i < n; i++) indices.push(i)
+    indices.sort((a, b) => position[b] - position[a])
+
+    let curr = indices[0]
+    let res = 1
+
+    for (let i = 1; i < indices.length; i++) {
+        const idx = indices[i]
+        if ((target - position[idx]) * speed[curr] > (target - position[curr]) * speed[idx]) {
+            res++
+            curr = idx
+        }
+    }
+
+    return res
+};
