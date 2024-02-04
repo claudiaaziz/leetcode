@@ -73,3 +73,30 @@ var searchMatrix = function (matrix, target) {
 
     return false;
 };
+
+// claudia
+// time o(log(m * n)) - space o(1)
+const searchMatrix = (matrix, target) => {
+    if (matrix[0].length === 0 || matrix.length === 0) return false
+
+    const rows = matrix.length
+    const cols = matrix[0].length
+
+    let left = 0
+    let right = rows * cols - 1
+
+    while (left <= right) {
+        const midIdx = Math.floor((left + right) / 2)
+        const midEle = matrix[Math.floor(midIdx/cols)][midIdx % cols]
+
+        if (midEle === target) {
+            return true
+        } else if (midEle < target) {
+            left = midIdx + 1
+        } else {
+            right = midIdx - 1
+        }
+    }
+    
+    return false
+};
