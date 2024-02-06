@@ -23,3 +23,21 @@ var findMin = function (nums) {
 
     return nums[left];
 };
+
+// claudia
+// time o(log n) - space o(1)
+const findMin = (nums) => {
+    let l = 0
+    let r = nums.length - 1
+
+    while (l < r) {
+        const mid = l + Math.floor((r - l) / 2)
+        if (nums[mid] > nums[r]) {
+            l = mid + 1
+        } else {
+            r = mid
+        }
+    }
+
+    return nums[l]
+};
