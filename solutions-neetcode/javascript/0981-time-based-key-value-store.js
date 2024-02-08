@@ -50,3 +50,43 @@ class TimeMap {
         return value;
     }
 }
+
+// claudia
+// space o(n)
+class TimeMap {
+    constructor() {
+        this.map = {}
+    };
+
+    // time o(1) - space o(1)
+    set(key, value, timestamp) {
+        this.map[key] = this.map[key] || []
+        this.map[key].push({ value, timestamp })
+    };
+
+    // time o(log n) - space o(1)
+    get(key, timestamp) {
+        const vals = this.map[key] || []
+        let res = ""
+        let l = 0
+        let r = vals.length - 1
+
+        if (vals.length === 0) return "";
+        if (timestamp < vals[0].timestamp) return "";
+
+        while (l <= r) {
+            const mid = Math.floor((l+r) / 2)
+
+            if (vals[mid].timestamp === timestamp) {
+                return vals[mid].value;
+            } else if (vals[mid].timestamp < timestamp) {
+                res = vals[mid].value
+                l = mid + 1
+            } else {
+                r = mid - 1
+            }
+        }
+
+        return res
+    };
+};
