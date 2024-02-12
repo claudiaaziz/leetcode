@@ -51,50 +51,63 @@ const reorder = (l1, l2) => {
 }
 
 // claudia
-// time o(n/2) - space o(1)
-const reorderList = (head) => {
-    // PART 1 - find head2
-    let slow = head;
-    let fast = head;
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+
+// claudia
+// time o(n) - space o(1) 
+const reorderList = head => {
+    // Step 1: find and split the list at the halfway point
+    let slow = head
+    let fast = head
 
     while (fast !== null && fast.next !== null) {
-        slow = slow.next;
-        fast = fast.next.next;
+        slow = slow.next
+        fast = fast.next.next
     }
 
-    let head2 = slow.next;
-    slow.next = null;
+    const head2 = slow.next
+    slow.next = null
 
-    // PART 2 - reverse head2
-    const reversedHead2 = reverseHead2(head2);
+    // Step 2: reverse halfway point (h2)
+    const h2 = reverseHead2(head2)
 
-    // PART 3 - zip lists
-    zipLists(head, reversedHead2)
+    // Step 3: zip the lists
+    zipLists(head, h2)
 };
 
-const reverseHead2 = (head2) => {
-    let current = head2;
-    let prev = null;
+const reverseHead2 = h2 => {
+    let prev = null
+    let current = h2
 
     while (current !== null) {
-        const next = current.next;
-        current.next = prev;
-        prev = current;
-        current = next;
+        const next = current.next
+        current.next = prev
+        prev = current
+        current = next
     }
 
-    return prev;
-};
+    return prev
+}
 
 const zipLists = (h1, h2) => {
     while (h2 !== null) {
-        const temp1 = h1.next;
-        const temp2 = h2.next;
+        const temp1 = h1.next
+        const temp2 = h2.next
+        
+        h1.next = h2
+        h2.next = temp1
 
-        h1.next = h2;
-        h2.next = temp1;
-
-        h1 = temp1;
-        h2 = temp2;
+        h1 = temp1
+        h2 = temp2
     }
 }
