@@ -51,19 +51,6 @@ const reorder = (l1, l2) => {
 }
 
 // claudia
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @return {void} Do not return anything, modify head in-place instead.
- */
-
-// claudia
 // time o(n) - space o(1) 
 const reorderList = head => {
     // Step 1: find and split the list at the halfway point
