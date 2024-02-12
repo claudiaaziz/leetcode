@@ -72,3 +72,26 @@ const moveNode = (curr, length) => {
 
     return curr;
 }
+
+// claudia
+// T o(n) - S o(1)
+const removeNthFromEnd = (head, n) => {
+    let dummy = new ListNode(null)
+    dummy.next = head
+
+    let left = dummy
+    let right = head
+
+    while (right && n > 0) {
+        right = right.next
+        n--
+    }
+
+    while (right) {
+        left = left.next 
+        right = right.next
+    }
+
+    left.next = left.next.next
+    return dummy.next
+};
