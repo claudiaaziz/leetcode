@@ -63,3 +63,26 @@ const connectNode = (head) => {
 
     return next
 }
+
+// claudia
+// time o(n) - space o(n)
+const copyRandomList = (head) => {
+    if (!head) return null
+
+    const clones = new Map()
+
+    let curr = head
+    while (curr) {
+        clones.set(curr, new Node(curr.val))
+        curr = curr.next
+    }
+
+    curr = head
+    while (curr) {
+        clones.get(curr).next = clones.get(curr.next) || null
+        clones.get(curr).random = clones.get(curr.random) || null
+        curr = curr.next
+    }
+
+    return clones.get(head)
+};
