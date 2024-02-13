@@ -36,3 +36,14 @@ var isSubsequence = function(s, t) {
     }
     return true
 };
+
+// claudia
+// t o(n) - space o(m)
+const isSubsequence = (s, t) => {
+  const temp = s.split("");
+  for (const char of t) {
+    if (temp[0] === char) temp.shift();
+  }
+
+  return temp.length === 0;
+};
