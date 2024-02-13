@@ -39,11 +39,17 @@ var isSubsequence = function(s, t) {
 
 // claudia
 // t o(n) - space o(m)
+// time o(n) - space o(1) 
 const isSubsequence = (s, t) => {
-  const temp = s.split("");
-  for (const char of t) {
-    if (temp[0] === char) temp.shift();
-  }
+    let sIdx = 0;
+    let tIdx = 0;
 
-  return temp.length === 0;
+    while (sIdx < s.length && tIdx < t.length) {
+        if (s[sIdx] === t[tIdx]) {
+            sIdx++;
+        }
+        tIdx++;
+    }
+
+    return sIdx === s.length;    
 };
