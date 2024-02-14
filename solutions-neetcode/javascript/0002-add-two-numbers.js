@@ -58,3 +58,35 @@ var addTwoNumbers = function(l1, l2, carry = 0) {
 
     return sentinel.next;
 };
+
+// claudia
+// time o(n) - space o(n)
+var addTwoNumbers = function(l1, l2) {
+    const newL1 = concatNumsReversed(l1);
+    const newL2 = concatNumsReversed(l2);
+
+    const sum = BigInt(newL1) + BigInt(newL2);
+    const reversedSum = String(sum).split("").reverse().join("");
+    
+    let dummyHead = new ListNode(0);
+    let current = dummyHead;
+
+    for (let i = 0; i < reversedSum.length; i++) {
+        current.next = new ListNode(Number(reversedSum[i]));
+        current = current.next;
+    }
+
+    return dummyHead.next;
+};
+
+const concatNumsReversed = (head) => {
+    let reverse = "";
+    let curr = head;
+
+    while (curr) {
+        reverse += curr.val;
+        curr = curr.next;
+    }
+
+    return reverse.split("").reverse().join("");
+};
