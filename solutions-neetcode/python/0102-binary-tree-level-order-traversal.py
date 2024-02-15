@@ -25,3 +25,35 @@ class Solution:
                     q.append(node.right)
             res.append(val)
         return res
+
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from collections import deque
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None: return []
+
+        queue = deque([root])
+        res = []
+
+        while queue:
+            sub_level = []
+            sub_level_length = len(queue)
+
+            for i in range(sub_level_length):
+                curr = queue.popleft()
+                sub_level.append(curr.val)
+
+                if curr.left: queue.append(curr.left)
+                if curr.right: queue.append(curr.right)
+            
+            res.append(sub_level)
+        
+        return res
