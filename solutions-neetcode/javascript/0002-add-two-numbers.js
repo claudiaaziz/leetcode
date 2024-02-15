@@ -90,3 +90,33 @@ const concatNumsReversed = (head) => {
 
     return reverse.split("").reverse().join("");
 };
+
+// claudia
+// time o(max(m, n)) - space o(max(m, n))
+const addTwoNumbers = (l1, l2) => {
+    const dummy = new ListNode(0)
+    let pointer = dummy
+    let carry = 0
+
+    while (l1 || l2 || carry) {
+        let sum = 0
+
+        if (l1) {
+            sum += l1.val
+            l1 = l1.next    
+        }
+        
+        if (l2) {
+            sum += l2.val
+            l2 = l2.next    
+        }
+
+        sum += carry
+        carry = Math.floor(sum / 10)
+        const addNode = new ListNode(sum % 10)
+        pointer.next = addNode
+        pointer = pointer.next
+    }
+
+    return dummy.next
+};
