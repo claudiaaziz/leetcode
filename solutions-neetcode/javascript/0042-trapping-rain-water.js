@@ -94,3 +94,29 @@ const getWindows = (height, left, maxLeft, right, maxRight) => {
 
     return [leftWindow, rightWindow];
 };
+
+// claudia
+// t o(n) - s o(1)
+const trap = (height) => {
+    if (!height) return 0
+
+    let l = 0
+    let r = height.length - 1
+    let lMax = height[l]
+    let rMax = height[r]
+    let count = 0
+
+    while (l < r) {
+        if (lMax < rMax) {
+            l++
+            lMax = Math.max(lMax, height[l])
+            count += lMax - height[l]
+        } else {
+            r--
+            rMax = Math.max(rMax, height[r])
+            count += rMax - height[r]
+        }
+    }
+
+    return count
+};
