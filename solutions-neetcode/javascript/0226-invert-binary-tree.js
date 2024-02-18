@@ -58,3 +58,19 @@ const invertTree = (root) => {
     if (root) [root.left, root.right] = [invertTree(root.right), invertTree(root.left)]
     return root
 };
+
+// time o(n) - space o(n)
+const invertTree = (root) => {
+    const queue = [root]
+
+    while (queue.length) {
+        const node = queue.shift()
+        if (node) {
+            [node.left, node.right] = [node.right, node.left]   
+            queue.push(node.left)
+            queue.push(node.right)
+        }
+    }
+
+    return root
+};
