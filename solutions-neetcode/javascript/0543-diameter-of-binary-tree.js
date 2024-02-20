@@ -28,3 +28,20 @@ const dfs = (root, max) => {
 
     return height + 1;
 }
+
+// t o(n) - s o(n) 
+var diameterOfBinaryTree = function(root) {
+    let maxD = 0
+
+    const dfs = (node) => {
+        if (!node) return 0
+        const left = dfs(node.left)
+        const right = dfs(node.right)
+        const currD = left + right
+        maxD = Math.max(maxD, currD)
+        return Math.max(left, right) + 1
+    }
+    dfs(root)
+
+    return maxD
+};
