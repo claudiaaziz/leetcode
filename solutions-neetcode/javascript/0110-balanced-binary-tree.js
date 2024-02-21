@@ -76,3 +76,22 @@ var dfs = (root) => {
 
     return [ (height + 1), _isRootBalanced ];
 }
+
+// claudia
+// t o(n) - s o(h)
+var isBalanced = function(root) {
+    if (!root) return true
+    let res = true
+
+    const dfs = (node) => {
+        if (!node) return 0
+        
+        const leftHeight = dfs(node.left)
+        const rightHeight = dfs(node.right)
+        if (Math.abs(leftHeight - rightHeight) > 1) res = false
+        return Math.max(leftHeight, rightHeight) + 1
+    }
+
+    dfs(root)
+    return res
+};
