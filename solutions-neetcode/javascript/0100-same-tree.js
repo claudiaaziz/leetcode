@@ -69,3 +69,35 @@ const isSameNode = (p, q) => {
 const isSame = (p, q) => isSameNode(p, q)
     && isSameNode(p.left, q.left)
     && isSameNode(p.right, q.right);
+
+// claudia
+// t o(n) || s o(h)
+var isSameTree = function(p, q) {
+    if (!p && !q) return true
+    if (!p || !q || p.val !== q.val) return false
+
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+};
+
+t o(n) - s o(m)
+var isSameTree = function(p, q) {
+    const queue = [p, q]
+
+    while (queue.length) {
+        const currP = queue.shift()
+        const currQ = queue.shift()
+
+        if (!currP && !currQ) {
+            continue
+        } else if (!currP || !currQ || currP.val !== currQ.val) {
+            return false
+        }
+
+        queue.push(currP.left)
+        queue.push(currQ.left)
+        queue.push(currP.right)
+        queue.push(currQ.right)
+    }
+
+    return true
+};
