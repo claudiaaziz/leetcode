@@ -47,3 +47,43 @@ const moveLeft = (root, stack) => {
 
     return stack.pop();
 }
+
+// claudia 
+// recursive t o(h + k) - s o(h)
+var kthSmallest = function(root, k) {
+    let count = 0
+    let target = null
+
+    const dfs = (node) => {
+        if (node.left) dfs(node.left)
+        count++
+        if (k === count) {
+            target = node.val
+        }
+        if (node.right) dfs(node.right)
+    }
+
+    dfs(root)
+    return target
+};
+
+
+// iterative t o(h + k) - s o(h)
+var kthSmallest = function(root, k) {
+    const stack = []
+    let curr = root
+
+    while (curr || stack.length) {
+        while (curr) {
+            stack.push(curr)
+            curr = curr.left
+        }
+
+        if (stack.length) {
+            curr = stack.pop()
+            k--
+            if (k === 0) return curr.val
+            curr = curr.right
+        }
+    }
+};
