@@ -94,3 +94,17 @@ var isSubtree = function(root, subRoot, hash = new Map (), postOrderKey = [0]) {
 
     return hash.has(hashKey)
 }
+
+// claudia
+// t o(n * m) - s o(n * m)
+var isSubtree = function(root, subRoot) {
+    if (!root) return false
+    if (isSameTree(root, subRoot)) return true
+    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot)
+};
+
+const isSameTree = (node1, node2) => {
+    if (!node1 && !node2) return true
+    if (!node1 || !node2 || node1.val !== node2.val) return false
+    return isSameTree(node1.left, node2.left) && isSameTree(node1.right, node2.right)
+}
