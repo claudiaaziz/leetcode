@@ -96,7 +96,7 @@ var isSubtree = function(root, subRoot, hash = new Map (), postOrderKey = [0]) {
 }
 
 // claudia
-// t o(n * m) - s o(n * m)
+// t o(n * m) - s o(h)
 var isSubtree = function(root, subRoot) {
     if (!root) return false
     if (isSameTree(root, subRoot)) return true
