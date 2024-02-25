@@ -45,8 +45,23 @@
 };
 
 // claudia 
-// t o(n) - space o(h)
-const lowestCommonAncestor = (root, p, q) => {
+// t o(log n) - s o(1)
+var lowestCommonAncestor = function(root, p, q) {
+    let curr = root
+
+    while (curr) {
+        if (p.val < curr.val && q.val < curr.val) {
+            curr = curr.left
+        } else if (p.val > curr.val && q.val > curr.val) {
+            curr = curr.right
+        } else {
+            return curr
+        }
+    }
+};
+
+// t o(log n) - s o(log n) 
+var lowestCommonAncestor = function(root, p, q) {
     if (p.val < root.val && q.val < root.val) {
         return lowestCommonAncestor(root.left, p, q)
     } else if (p.val > root.val && q.val > root.val) {
