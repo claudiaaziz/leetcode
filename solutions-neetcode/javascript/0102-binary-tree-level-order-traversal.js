@@ -55,3 +55,26 @@ const dfs = (root, level, levels) => {
 
     return levels;
 }
+
+// claudia
+// time o(n) - s o(n)
+const levelOrder = (root) => {
+    if (!root) return []
+
+    const res = []
+    const queue = [root]
+
+    while (queue.length) {
+        const len = queue.length
+        const level = []
+        for (let i = 0; i < len; i++) {
+            const node = queue.shift()
+            level.push(node.val)
+            if (node.left) queue.push(node.left)
+            if (node.right) queue.push(node.right)
+        }
+        res.push(level)
+    }
+
+    return res
+};
