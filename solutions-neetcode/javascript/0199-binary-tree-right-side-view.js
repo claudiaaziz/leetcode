@@ -53,3 +53,26 @@ const dfs = (root, level, rightSide) => {
     return rightSide
 }
 
+// claudia
+// t o(n) - s o(n)
+const rightSideView = (root) => {
+    if (!root) return []
+
+    const queue = [root]
+    const res = []
+
+    while (queue.length) {
+        const len = queue.length
+        const lvl = []
+
+        for (let i = 0; i < len; i++) {
+            const node = queue.shift()
+            lvl.push(node.val)
+            if (node.left) queue.push(node.left)    
+            if (node.right) queue.push(node.right)
+        }
+        res.push(lvl[lvl.length-1])
+    }
+
+    return res
+};
