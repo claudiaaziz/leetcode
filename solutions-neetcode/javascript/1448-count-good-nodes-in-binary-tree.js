@@ -57,3 +57,23 @@ const bfs = (queue, total = 0) => {
 
     return total;
 }
+
+// claudia
+// t o(n) - s o(h)
+var goodNodes = function(root) {
+    let count = 0
+    let max = root.val
+
+    const dfs = (node, max) => {
+        if (!node) return
+        if (node.val >= max) {
+            max = Math.max(node.val, max)
+            count++
+        }
+        dfs(node.left, max)
+        dfs(node.right, max)
+    }
+    dfs(root, max)
+
+    return count
+};
