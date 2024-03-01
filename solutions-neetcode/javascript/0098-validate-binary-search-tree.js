@@ -70,3 +70,25 @@ const moveLeft = (stack, root) => {
         root = root.left;
     }
 }
+
+// claudia
+// t o(n) - s o(n)
+var isValidBST = function(root) {
+    const inOrderList = []
+
+    const inOrderTraversal = (node) => {
+    if (!node) return 
+        inOrderTraversal(node.left)
+        inOrderList.push(node.val)
+        inOrderTraversal(node.right)
+    }
+
+
+    inOrderTraversal(root)
+
+    for (let i = 0; i < inOrderList.length - 1; i++) {
+        if (inOrderList[i] >= inOrderList[i+1]) return false
+    }
+
+    return true
+};
