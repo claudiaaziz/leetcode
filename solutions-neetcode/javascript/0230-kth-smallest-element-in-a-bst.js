@@ -49,6 +49,23 @@ const moveLeft = (root, stack) => {
 }
 
 // claudia 
+// t o(n) - s o(h)
+var kthSmallest = function(root, k) {
+    let target = 0
+
+    const inOrderTraversal = (node) => {
+        if (!node) return
+        inOrderTraversal(node.left)
+        k--
+        if (k === 0) target = node.val
+        inOrderTraversal(node.right)
+    }
+
+    inOrderTraversal(root)
+
+    return target
+};
+
 // recursive t o(h + k) - s o(h)
 var kthSmallest = function(root, k) {
     let count = 0
