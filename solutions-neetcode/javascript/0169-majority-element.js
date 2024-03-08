@@ -45,3 +45,21 @@ var majorityElement = function (nums) {
 		if (value > nums.length / 2) return key;
 	}
 };
+
+// claudia
+// t o(n) - s o(1)
+var majorityElement = function(nums) {
+    let count = 0
+    let majorityEle;
+
+    for (const num of nums) {
+        if (count === 0) majorityEle = num
+        if (num === majorityEle) {
+            count++
+        } else {
+            count--
+        }
+    }
+
+    return majorityEle
+};
