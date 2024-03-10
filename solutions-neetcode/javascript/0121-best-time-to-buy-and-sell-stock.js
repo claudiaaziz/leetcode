@@ -42,3 +42,17 @@ var maxProfit = function (prices) {
     }
     return value;
 };
+
+// claudia
+// t o(n) - s o(1)
+var maxProfit = function(prices) {
+    let minPrice = Infinity
+    let res = 0
+
+    for (let i = 0; i < prices.length; i++) {
+        minPrice = Math.min(minPrice, prices[i])
+        res = Math.max(prices[i] - minPrice, res)
+    }
+
+    return res
+};
