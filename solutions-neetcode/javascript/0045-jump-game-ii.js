@@ -45,3 +45,27 @@ const getMaxReach = (nums, left, right, maxReach = 0) => {
 
     return jumps;
 }
+
+// claudia
+// t o(n) - s o(1)
+const jump = (nums) => {
+  if (nums.length === 1) return 0;
+
+  let totalJumps = 0;
+  const destination = nums.length - 1;
+  let coverage = 0;
+  let lastJumpIdx = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    coverage = Math.max(coverage, i + nums[i]);
+
+    if (i === lastJumpIdx) {
+      lastJumpIdx = coverage;
+      totalJumps++;
+
+      if (coverage >= destination) return totalJumps;
+    }
+  }
+
+  return totalJumps;
+};
