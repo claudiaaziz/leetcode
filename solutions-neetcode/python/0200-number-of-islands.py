@@ -39,7 +39,7 @@ class SolutionBFS:
         visited=set()
         islands=0
 
-         def bfs(r,c):
+        def bfs(r,c):
              q = deque()
              visited.add((r,c))
              q.append((r,c))
@@ -55,12 +55,48 @@ class SolutionBFS:
                          q.append((r , c ))
                          visited.add((r, c ))
 
-         for r in range(rows):
+        for r in range(rows):
              for c in range(cols):
                
                  if grid[r][c] == "1" and (r,c) not in visited:
                      bfs(r,c)
                      islands +=1 
 
-         return islands
+        return islands
+    
+
+
+
+
+
+
+
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        count = 0
+        visited = set()
+        rows = len(grid)
+        cols = len(grid[0])
+
+        for row in range(rows):
+            for col in range(cols):
+                if self.explore(grid, row, col, visited) == True:
+                    count+=1
+        
+        return count
+    
+    def explore(self, grid, row, col, visited):
+        if (row < 0 or row >= len(grid)) or (col < 0 or col >= len(grid[0])) or ((row, col) in visited) or (grid[row][col] == "0"):
+            return False
+        
+        visited.add((row, col))
+
+        self.explore(grid, row + 1, col, visited)
+        self.explore(grid, row - 1, col, visited)
+        self.explore(grid, row, col + 1, visited)
+        self.explore(grid, row, col - 1, visited)
+
+        return True
 
