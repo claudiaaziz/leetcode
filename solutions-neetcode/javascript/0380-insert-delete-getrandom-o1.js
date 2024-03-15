@@ -38,3 +38,35 @@ RandomizedSet.prototype.getRandom = function () {
  * var param_2 = obj.remove(val)
  * var param_3 = obj.getRandom()
  */
+
+// claudia
+// t o(1) - s o(n)
+class RandomizedSet {
+    constructor() {
+        this.map = new Map()
+        this.array = []
+    }
+
+    insert(val) {
+        if (this.map.has(val)) return false
+        this.map.set(val, this.array.length)
+        this.array.push(val)
+        return true
+    };
+
+    remove(val) {
+        if (!this.map.has(val)) return false
+        const idx = this.map.get(val)
+        this.array[idx] = this.array[this.array.length-1]
+        this.map.set(this.array[idx], idx)
+
+        this.array.pop()
+        this.map.delete(val)
+        return true
+    };
+
+    getRandom() {
+        const randomIdx = Math.floor(Math.random() * this.array.length)
+        return this.array[randomIdx]
+    };
+};
