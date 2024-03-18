@@ -21,3 +21,24 @@
     
     return result;
 };
+
+// claudia
+// t o(n) - s o(1)
+var productExceptSelf = function (nums) {
+  const n = nums.length;
+  const res = Array(n).fill(0);
+
+  let prefix = 1;
+  for (let i = 0; i < n; i++) {
+    res[i] = prefix;
+    prefix *= nums[i];
+  }
+
+  let suffix = 1;
+  for (let i = n - 1; i >= 0; i--) {
+    res[i] *= suffix;
+    suffix *= nums[i];
+  }
+
+  return res;
+};
