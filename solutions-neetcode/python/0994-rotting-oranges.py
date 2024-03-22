@@ -31,3 +31,55 @@ class Solution:
                         fresh -= 1
             time += 1
         return time if fresh == 0 else -1
+
+
+
+
+
+from collections import deque
+
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        # Keep track of how many fresh oranges there are and the positions of
+        # the rotten oranges.
+        rows = len(grid)
+        cols = len(grid[0])
+        fresh = 0
+        time = 0
+        queue = deque()
+
+        for row in range(rows):
+            for col in range(cols):
+                if grid[row][col] == 1:
+                    fresh+=1
+                if grid[row][col] == 2:
+                    queue.append([row, col])
+        
+        # Go through the queue and turn fresh oranges into rotten oranges.
+        directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        while queue and fresh > 0:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                r, c = queue.popleft()
+                for d1, d2 in directions:
+                    nr, nc = r + d1, c + d2
+                    if (nr < 0 or nr >= rows) or (nc < 0 or nc >= cols) or grid[nr][nc] != 1:
+                        continue
+                    # Once a fresh orange becomes a rotten orange, add the new rotten
+                    # orange to the queue and decrement fresh.
+                    grid[nr][nc] = 2
+                    queue.append([nr, nc])
+                    fresh -= 1
+            # Once a whole cycle of a queue completes, time increments by 1.
+            time += 1
+
+        # Return the time if there are no fresh oranges, else return -1.
+        if fresh == 0:
+            return time
+        else:
+            return -1
+
+
+        
+
+        
