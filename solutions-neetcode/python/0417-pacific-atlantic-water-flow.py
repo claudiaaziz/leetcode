@@ -33,3 +33,51 @@ class Solution:
                 if (r, c) in pac and (r, c) in atl:
                     res.append([r, c])
         return res
+
+
+
+
+
+
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        rows = len(heights)
+        cols = len(heights[0])
+        pacific = set()
+        atlantic = set()
+        
+        # DFS: The new height must be greater than the previous height for the ocean
+        # to reach the land
+        def dfs(row, col, visited, prev_height):
+            if row < 0 or row >= rows:
+                return
+            if col < 0 or col >= cols:
+                return
+            if (row, col) in visited:
+                return
+            if heights[row][col] < prev_height:
+                return
+            
+            visited.add((row, col))
+            dfs(row + 1, col, visited, heights[row][col])
+            dfs(row - 1, col, visited, heights[row][col])
+            dfs(row, col + 1, visited, heights[row][col])
+            dfs(row, col - 1, visited, heights[row][col])
+
+        # Checks the rows
+        for col in range(cols):
+            dfs(0, col, pacific, heights[0][col])
+            dfs(rows - 1, col, atlantic, heights[rows - 1][col])
+            
+        # Checks the columns
+        for row in range(rows):
+            dfs(row, 0, pacific, heights[row][0])
+            dfs(row, cols - 1, atlantic, heights[row][cols - 1])
+
+        res = []
+        for row in range(rows):
+            for col in range(cols):
+                if (row, col) in atlantic and (row, col) in pacific:
+                    res.append([row, col])
+        
+        return res
