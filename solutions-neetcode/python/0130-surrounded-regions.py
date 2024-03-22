@@ -28,3 +28,55 @@ class Solution:
             for c in range(COLS):
                 if board[r][c] == "T":
                     board[r][c] = "O"
+
+
+
+
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+
+        rows = len(board)
+        cols = len(board[0])
+        no_flip = set()
+
+        # Capture all the O's that shouldn't be flipped to X's
+        def dfs(row, col):
+            if row < 0 or row >= rows:
+                return
+            if col < 0 or col >= cols:
+                return
+            if (row, col) in no_flip:
+                return
+            if board[row][col] == "X":
+                return
+            
+            no_flip.add((row, col))
+            dfs(row + 1, col)
+            dfs(row - 1, col)
+            dfs(row, col + 1)
+            dfs(row, col - 1)
+
+        # Only do the edges
+        for row in range(rows):
+            dfs(row, 0)
+            dfs(row, cols - 1)
+        for col in range(cols):
+            dfs(0, col)
+            dfs(rows - 1, col)
+        
+        # If the position is an "O" and it's not in no_flip, it means it can be flipped
+        # into an "X".
+        for row in range(rows):
+            for col in range(cols):
+                if board[row][col] == "O" and (row, col) not in no_flip:
+                    board[row][col] = "X"
+        
+
+
+
+
+
+        
