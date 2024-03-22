@@ -91,3 +91,29 @@ function romanToInt(s) {
 // Runtime 97 ms
 // Memory usage: 47.8 MB
 // https://leetcode.com/problems/roman-to-integer/submissions/1020204566/
+
+// claudia
+// t o(n) - s o(1)
+var romanToInt = function(s) {
+    const conversion = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    }
+    let total = 0
+
+    let i = 0
+    for (let i = 0; i < s.length; i++) {
+        if (conversion[s[i+1]] > conversion[s[i]]) {
+            total -= conversion[s[i]]
+        } else {
+            total += conversion[s[i]]
+        }
+    }
+
+    return total
+};
