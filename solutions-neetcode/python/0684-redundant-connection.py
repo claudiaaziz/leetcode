@@ -27,3 +27,30 @@ class Solution:
         for n1, n2 in edges:
             if not union(n1, n2):
                 return [n1, n2]
+            
+
+
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        parent = list(range(len(edges) + 1))
+
+        def find(x):
+            if parent[x] != x:
+                return find(parent[x])
+            else:
+                return parent[x]
+        
+        def union(x, y):
+            parent_x = find(x)
+            parent_y = find(y)
+            if parent_x == parent_y:
+                return False
+            else:
+                parent[parent_y] = parent_x
+                return True
+        
+        for x, y in edges:
+            if union(x, y) == False:
+                return [x, y]
+
+
