@@ -26,3 +26,48 @@ class Solution:
             if dfs(c) == False:
                 return []
         return output
+
+
+
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Add all the courses and their prereq into a hash map.
+        course_map = { course: [] for course in range(numCourses)}
+        for course, prereq in prerequisites:
+            course_map[course].append(prereq)
+
+        # Keep track of the result, the current path using cycle, and courses that
+        # have already been checked using DFS.
+        res = []
+        cycle = set()
+        seen = set()
+
+        def dfs(crs):
+            # There's a cycle
+            if crs in cycle:
+                return False
+            # It's already been checked and it works.
+            if crs in seen:
+                return True
+
+            cycle.add(crs)
+            for prereq in course_map[crs]:
+                if dfs(prereq) == False:
+                    return False
+
+            # Backtrack by removing current course
+            cycle.remove(crs)
+            # Add current course to seen because it works and current course to 
+            # result because all of its prereqs have been recursively added.
+            seen.add(crs)
+            res.append(crs) 
+            return True
+
+        for course in range(numCourses):
+            if dfs(course) == False:
+                return []
+        return res
+
+
+        
