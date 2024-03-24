@@ -31,3 +31,18 @@ var lengthOfLastWord = function(s) {
     }
     return lastWordLen;
 };
+
+// claudia
+// t o(n) - s o(1)
+var lengthOfLastWord = function(s) {
+    let i = s.length-1
+    let length = 0
+
+    while (s[i] === " ") i--
+    while (s[i] !== " " && i >= 0) {
+        length++
+        i--
+    }
+    
+    return length
+};
