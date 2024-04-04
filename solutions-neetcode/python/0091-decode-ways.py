@@ -32,3 +32,44 @@ class Solution:
             ):
                 dp[i] += dp[i + 2]
         return dp[0]
+
+
+
+
+
+
+class Solution:
+    def numDecodings(self, s: str) -> int:
+
+        def dfs(i, memo):
+            if i in memo:
+                return memo[i]
+            # Base case: if index reaches the end of string, return 1
+            if i == len(s):
+                return 1
+            
+            count = 0
+
+            # Case 1: Single-digit decoding
+            if s[i] != "0":
+                count += dfs(i + 1, memo)
+            
+            # Case 2: Two-digit decoding
+            if i + 1 < len(s) and (s[i] == "1" or 
+                (s[i] == "2" and s[i + 1] in "0123456")):
+                count += dfs(i + 2, memo)
+            
+            memo[i] = count
+            return count
+        
+        return dfs(0, {})
+            
+
+
+            
+
+
+
+            
+
+        
