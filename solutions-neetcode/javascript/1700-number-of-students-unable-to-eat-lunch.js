@@ -23,3 +23,25 @@ var countStudents = function (students, sandwiches) {
 
     return students.length; // return length of array students
 };
+
+// t o(n+m) - s o(n)
+var countStudents = function(students, sandwiches) {
+    let res = students.length 
+    const count = {} 
+
+    for (const student of students) {
+        if (!count[student]) count[student] = 0
+        count[student]++
+    }
+
+    for (const sandwich of sandwiches) {
+        if (count[sandwich] > 0) {
+            res--
+            count[sandwich]--
+        } else {
+            return res
+        }
+    }
+
+    return res
+};
