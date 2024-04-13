@@ -21,3 +21,23 @@ var getIntersectionNode = function (headA, headB) {
 
     return a;
 };
+
+var getIntersectionNode = function(headA, headB) {
+    const set = new Set()
+
+    let curr1 = headA
+
+    while (curr1) {
+        set.add(curr1)
+        curr1 = curr1.next
+    }
+
+    let curr2 = headB
+
+    while (curr2) {
+        if (set.has(curr2)) return curr2
+        curr2 = curr2.next
+    }
+
+    return null
+};
