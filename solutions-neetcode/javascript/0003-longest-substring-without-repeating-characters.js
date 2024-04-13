@@ -20,3 +20,23 @@ var lengthOfLongestSubstring = function (s) {
     }
     return max;
 };
+
+var lengthOfLongestSubstring = function(s) {
+    let maxLength = 0 
+    const set = new Set() 
+    let l = 0 
+    let r = 0 
+
+    while (r < s.length) {
+        if (set.has(s[r])) {
+            maxLength = Math.max(maxLength, r-l)
+            set.delete(s[l])
+            l++
+        } else {
+            set.add(s[r])
+            r++
+        }
+    }
+
+    return Math.max(maxLength, set.size)
+};
