@@ -42,18 +42,18 @@ const dfs = (curr) => {
 
 // claudia
 // time o(n) - space o(1)
-const reverseList = (head) => {
+const reverseList = head => {
     let prev = null
-    let current = head
+    let curr = head 
 
-    while (current !== null) {
-        const next = current.next 
-        current.next = prev 
-        prev = current
-        current = next
+    while (curr) {
+        const next = curr.next 
+        curr.next = prev 
+        prev = curr 
+        curr = next 
     }
 
-    return prev
+    return prev 
 };
 
 // time o(n) - space o(n)
