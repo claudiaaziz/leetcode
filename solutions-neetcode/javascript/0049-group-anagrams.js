@@ -70,4 +70,19 @@ const getCode = (char) => char.charCodeAt(0) - 'a'.charCodeAt(0);
 
 const buildHash = (frequency) => frequency.toString();
 
+// 
 
+var groupAnagrams = function(strs) {
+    const hash = {}  
+
+    for (const s of strs) {
+        const sortedS = s.split('').sort().join('')
+        if (sortedS in hash) {
+            hash[sortedS].push(s)
+        } else {
+            hash[sortedS] = [s]
+        }
+    }
+
+    return Object.values(hash)
+};
