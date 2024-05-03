@@ -25,19 +25,22 @@ var search = function (nums, target) {
 };
 
 // claudia
-// time o(log n) - space o(log n)  
-const search = (nums, target) => {
-    if (nums.length === 0) return -1
-    const midIdx = Math.floor(nums.length / 2) 
-    const left = nums.slice(0, midIdx)
-    const right = nums.slice(midIdx + 1)
+// time o(log n) - space o(1)  
+const search = function(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
 
-    if (nums[midIdx] === target) { 
-        return midIdx
-    } else if (nums[midIdx] > target) {
-        return search(left, target)
-    } else {
-        const rightRes = search(right, target)
-        return rightRes === -1 ? - 1 : rightRes + midIdx + 1
+    while (left <= right) {
+        const midIdx = Math.floor((left + right) / 2); 
+
+        if (nums[midIdx] === target) {
+            return midIdx; 
+        } else if (nums[midIdx] > target) {
+            right = midIdx - 1;
+        } else {
+            left = midIdx + 1;
+        }
     }
+
+    return -1; 
 };
