@@ -47,3 +47,34 @@ class Solution:
                     nextDP[a] += nextDP[a - coins[i]]
             dp = nextDP
         return dp[amount]
+
+
+
+
+
+import math
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        memo = {}
+
+        def dfs(amt, idx):
+            if (amt, idx) in memo:
+                return memo[(amt, idx)]
+            if amt == 0:
+                return 1
+            if amt < 0 or idx >= len(coins):
+                return 0
+            
+            coin = coins[idx]
+            steps = math.ceil(amt / coin)
+
+            count = 0
+            for i in range(0, steps + 1):
+                diff = coin * i
+                count += dfs(amt - diff, idx + 1)
+            
+            memo[(amt, idx)] = count
+            return count
+        
+        return dfs(amount, 0)
+        
