@@ -13,3 +13,40 @@ class Solution:
                 if j < len(s2) and s2[j] == s3[i + j] and dp[i][j + 1]:
                     dp[i][j] = True
         return dp[0][0]
+
+
+
+
+
+
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        if len(s1) + len(s2) != len(s3):
+            return False
+
+        memo = {}
+
+        def dfs(i, j):
+            if (i, j) in memo:
+                return memo[(i, j)]
+            
+            # We went through both strings and never returned False, so we know
+            # it works.
+            if i == len(s1) and j == len(s2):
+                return True
+            
+            # s1 is a match so we increment s1 and keep s2 the same
+            if i < len(s1) and s1[i] == s3[i + j] and dfs(i + 1, j):
+                memo[(i, j)] = True
+                return True
+            # s2 is a match so we increment s2 and keep s1 the same
+            if j < len(s2) and s2[j] == s3[i + j] and dfs(i, j + 1):
+                memo[(i, j)] = True
+                return True
+            
+            # Return False if both of the above don't return True.
+            memo[(i, j)] = False
+            return False
+        
+        return dfs(0, 0)
+        
