@@ -40,3 +40,24 @@ var lengthOfLongestSubstring = function(s) {
 
     return Math.max(maxLength, set.size)
 };
+
+// t o(n) - s o(min(n,m))
+var lengthOfLongestSubstring = function(s) {
+    const window = new Set()
+    let longest = 0
+    let l = 0
+    let r = 0
+
+    while (r < s.length) {
+        if (window.has(s[r])) {
+            longest = Math.max(longest, r-l)
+            window.delete(s[l])
+            l++
+        } else {
+            window.add(s[r])
+            r++
+        }
+    }
+
+    return Math.max(longest, window.size)
+};
