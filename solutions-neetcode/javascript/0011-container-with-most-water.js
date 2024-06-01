@@ -29,3 +29,23 @@ var maxArea = function (height) {
 
     return max;
 };
+
+// t o(n) - s o(1)
+var maxArea = function(height) {
+    let max = 0
+    let l = 0
+    let r = height.length-1
+
+    while (l < r) {
+        const minHeight = Math.min(height[l], height[r])
+        max = Math.max((r-l) * minHeight, max)
+        
+        if (height[l] < height[r]) {
+            l++
+        } else {
+            r--
+        }
+    }
+
+    return max
+};
