@@ -76,3 +76,29 @@ const subtractLeftFrequency = (s, left, map) => {
 };
 
 const getCode = (char) => char.charCodeAt(0) - 'A'.charCodeAt(0);
+
+// t o(n) - s o(1)
+var characterReplacement = function(s, k) {
+    let l = 0 
+    let r = 0 
+    const windowCount = {} 
+    let topFreq = 0 
+    let longest = 0 
+
+    while (r < s.length) {
+        const rChar = s[r]
+        windowCount[rChar] = windowCount[rChar] + 1 || 1
+        topFreq = Math.max(topFreq, windowCount[rChar])
+
+        while ((r-l+1) - topFreq > k) {
+            const lChar = s[l]
+            windowCount[lChar]--
+            l++
+        }
+
+        longest = Math.max((r-l+1), longest)
+        r++
+    }
+
+    return longest
+};
