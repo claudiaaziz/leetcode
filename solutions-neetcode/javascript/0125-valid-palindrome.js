@@ -85,3 +85,29 @@ var isPalindrome = function (s) {
   }
   return true
 };
+
+// t o(n) - s o(n)
+const isPalindrome = s => {
+    s = s.toLowerCase();
+
+    let filteredStr = '';
+
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i];
+
+        if ((char >= 'a' && char <= 'z') || (char >= '0' && char <= '9')) {
+            filteredStr += char;
+        }
+    }
+
+    let l = 0;
+    let r = filteredStr.length - 1;
+    
+    while (l < r) {
+        if (filteredStr[l] !== filteredStr[r]) return false;
+        l++;
+        r--;
+    }
+    
+    return true;
+}
